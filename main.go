@@ -3,6 +3,7 @@ package main
 import (
 	// routes "Auth-API/routes"
 	db "dns-user/database"
+	"dns-user/routes"
 	"fmt"
 	"log"
 	"os"
@@ -19,6 +20,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
+
+	// if os.Getenv("GIN_MODE") != gin.ReleaseMode {
+	// 	// os.Setenv("GIN_MODE", gin.ReleaseMode)
+	// }
+	// gin.SetMode(gin.ReleaseMode)
+
 	startTime = time.Now()
 
 	port := os.Getenv("PORT")
@@ -39,9 +46,9 @@ func main() {
 	router := gin.New()
 	router.Use(gin.Logger())
 
-	// apiVersion1Group := router.Group("/api/v1")
+	apiVersion1Group := router.Group("/api/v1")
 
-	// routes.AuthRoutes(apiVersion1Group)
+	routes.AuthRoutes(apiVersion1Group)
 	// routes.UserRoutes(apiVersion1Group)
 	router.GET("/api-1", func(c *gin.Context) {
 		c.JSON(200, gin.H{"success": "Access granted for api-1"})
@@ -62,6 +69,5 @@ func main() {
 			},
 		})
 	})
-
 	router.Run(":" + port)
 }

@@ -7,7 +7,10 @@ import (
 	_ "github.com/lib/pq"
 )
 
+var DB *sql.DB
+
 func DatabaseConnection(connStr string) (*sql.DB, error) {
+	var err error
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
@@ -32,7 +35,7 @@ func DatabaseConnection(connStr string) (*sql.DB, error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	DB = db
 	return db, nil
 
 }
