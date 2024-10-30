@@ -49,7 +49,8 @@ func main() {
 	apiVersion1Group := router.Group("/api/v1")
 
 	routes.AuthRoutes(apiVersion1Group)
-	// routes.UserRoutes(apiVersion1Group)
+	routes.UserRoutes(apiVersion1Group)
+
 	router.GET("/api-1", func(c *gin.Context) {
 		c.JSON(200, gin.H{"success": "Access granted for api-1"})
 	})
