@@ -28,7 +28,6 @@ func GetUser(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
 		return
 	}
-	log.Println(usr)
 
 	userID, ok := usr["id"].(float64)
 	if !ok {
